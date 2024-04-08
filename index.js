@@ -19,6 +19,9 @@ console.log('servidor express andando')
 app.use(cors())
 console.log('cors andando')
 
+//lectura y parseo body
+app.use( express.json() )
+
 //base de datos
 dbConnection();
 console.log('db on line')
@@ -33,12 +36,9 @@ console.log('db on line')
 
 
 
-app.get( '/', (req, resp)=> {
-    resp.status(200).json({
-        ok: true,
-        msg: 'Hola Mundo!!!'
-    });
-} );
+//rutas
+app.use( '/api/usuarios' , require('./routes/usuarios.routes')  )
+
 
 app.listen ( process.env.PORT, () => {
     console.log ('servidor corriendo puerto ' + process.env.PORT )
