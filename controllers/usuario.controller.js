@@ -14,11 +14,10 @@ const getUsuarios = async (req, resp)=> {
     });
 } 
 
-
+//creacion de usuario
 const addUsuario = async (req, resp = response)=> {
 
-    const {password, email, nombre} = req.body
-        
+    const {password, email, nombre} = req.body        
 
     try {
 
@@ -58,6 +57,7 @@ const addUsuario = async (req, resp = response)=> {
     }
 } 
 
+//actualizacion de usuario
 const updateUsuario = async (req, resp = response ) => {
 
     //obtengo el uid enviado (que es el usuario que se quiere modificar)
@@ -81,13 +81,12 @@ const updateUsuario = async (req, resp = response ) => {
         //actualizacion
 
         //creo una variable que va a tener todos los campos del body de es uid
-        const campos = req.body
+        const {password, google, email, ...campos} = req.body
 
-        if(usuarioDb.email === req.body.email){
-            delete campos.email
-        } else {
-            const existeEmail = await IUsuario.findOne( {email: req.body.email})
-            if (existeEmail) {
+        if(usuarioDb.email !== email){
+            
+            const existeEmail = await IUsuario.findOne( { email })
+            if ( existeEmail ) {
                 return resp.status(400).json({
                     ok: false,
                     msg: "ya existe un usuario con ese email"
@@ -95,14 +94,10 @@ const updateUsuario = async (req, resp = response ) => {
             }
         }
 
-        delete campos.google
-        delete campos.password
+        campos.email = email
 
         // se le pone {new: true} para que me devuelva el usuario actualizado a la primera
         const usuarioActualizado = await IUsuario.findByIdAndUpdate(uid, campos, {new: true})
-
-
-
 
         resp.json({
             ok: true,
@@ -118,9 +113,47 @@ const updateUsuario = async (req, resp = response ) => {
     }
 }
 
+const deleteUsuario = async (req, resp = response ) => {
+    
+    const uid = req.params.uid
+    
+    try {
+
+        const usuarioBd = await IUsuario.findById(uid)
+
+        if( !usuarioBd ){
+            return resp.status(404).json({
+                ok: false,
+                msg: "usuario no encontrado"
+            })
+        }
+
+    
+        await IUsuario.findByIdAndDelete ( uid )
+      
+
+        resp.json({
+            ok: true,
+            msg: "usuario eliminado" 
+        })
+        
+    } catch (error) {
+        console.log("error al borrar usuario" + error)
+        resp.status(500).json({
+            ok: false,
+            msg : "error al borrar usuario"
+        
+        })
+    }
+    
+    
+
+}
+
 
 module.exports = {
     getUsuarios,
     addUsuario, 
-    updateUsuario
+    updateUsuario,
+    deleteUsuario
 }
