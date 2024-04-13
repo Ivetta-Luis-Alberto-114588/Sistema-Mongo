@@ -1,11 +1,12 @@
 const {response} = require('express')
-const IUsuario = require('../models/usuario.models')
+const Usuario = require('../models/usuario.models')
 const bcryptjs = require('bcryptjs')
+const { generarJwt } = require('../helpers/jwt.helpers')
 
 
 const getUsuarios = async (req, resp)=> {
     
-    const usuarios = await IUsuario.find( {}, 'nombre email password role ' )
+    const usuarios = await Usuario.find( {}, 'nombre email password role ' )
     console.log ("lista de usuarios: " + usuarios)
     
     resp.status(200).json({
@@ -21,7 +22,7 @@ const addUsuario = async (req, resp = response)=> {
 
     try {
 
-        const existeEmail = await IUsuario.findOne( {email})
+        const existeEmail = await Usuario.findOne( {email})
 
         if( existeEmail){
             return resp.status(400).json({
@@ -30,7 +31,7 @@ const addUsuario = async (req, resp = response)=> {
             })
         }
 
-        const usuario = new IUsuario ( req.body );
+        const usuario = new Usuario ( req.body );
 
         //encriptar contraseña antes de guardar usuario
         //genero sal alaeatoria
@@ -43,9 +44,14 @@ const addUsuario = async (req, resp = response)=> {
         await usuario.save();
         console.log("usuario creado: " + usuario)
 
+        //generar jwt
+        const token = await generarJwt(usuario.uid)
+        console.log(token)
+
         resp.status(200).json({
             ok: true,
-            usuario
+            usuario,
+            token
         });
         
     } catch (error) {
@@ -67,7 +73,7 @@ const updateUsuario = async (req, resp = response ) => {
         //TODO: validar token y verificar usuario
 
         //encuentro el usuario con ese uid
-        const usuarioDb = await IUsuario.findById(uid)
+        const usuarioDb = await Usuario.findById(uid)
         console.log("usuario encontrado: " + usuarioDb)
         
         //si el usuario no existe devuelvo un error
@@ -85,7 +91,7 @@ const updateUsuario = async (req, resp = response ) => {
 
         if(usuarioDb.email !== email){
             
-            const existeEmail = await IUsuario.findOne( { email })
+            const existeEmail = await Usuario.findOne( { email })
             if ( existeEmail ) {
                 return resp.status(400).json({
                     ok: false,
@@ -97,7 +103,7 @@ const updateUsuario = async (req, resp = response ) => {
         campos.email = email
 
         // se le pone {new: true} para que me devuelva el usuario actualizado a la primera
-        const usuarioActualizado = await IUsuario.findByIdAndUpdate(uid, campos, {new: true})
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
 
         resp.json({
             ok: true,
@@ -119,18 +125,16 @@ const deleteUsuario = async (req, resp = response ) => {
     
     try {
 
-        const usuarioBd = await IUsuario.findById(uid)
-
+        const usuarioBd = await Usuario.findById(uid)
+  
         if( !usuarioBd ){
             return resp.status(404).json({
                 ok: false,
                 msg: "usuario no encontrado"
             })
         }
-
     
-        await IUsuario.findByIdAndDelete ( uid )
-      
+        await Usuario.findByIdAndDelete ( uid )      
 
         resp.json({
             ok: true,
@@ -138,7 +142,7 @@ const deleteUsuario = async (req, resp = response ) => {
         })
         
     } catch (error) {
-        console.log("error al borrar usuario" + error)
+        console.log("error al borrar usuario " + error)
         resp.status(500).json({
             ok: false,
             msg : "error al borrar usuario"
