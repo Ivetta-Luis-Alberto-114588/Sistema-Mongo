@@ -33,10 +33,12 @@ const login = async (req, resp = response) =>{
         const token = await generarJwt( usuarioDB._id ) 
 
 
+        //estructuro lo que quiero devolver
         resp.status(200).json({
             ok: true,
             msg: "login ok",
-            token
+            token: token,
+            uid: usuarioDB._id
         })
         
     } catch (error) {

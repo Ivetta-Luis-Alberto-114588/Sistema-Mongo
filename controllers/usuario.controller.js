@@ -6,12 +6,15 @@ const { generarJwt } = require('../helpers/jwt.helpers')
 
 const getUsuarios = async (req, resp)=> {
     
-    const usuarios = await Usuario.find( {}, 'nombre email password role ' )
-    console.log ("lista de usuarios: " + usuarios)
+    //observar que no se pone el uid para devolver, pero sin embargo el middleware lo agrega al header
+    const usuarios = await Usuario.find( {}, 'nombre email password role google ' )
     
     resp.status(200).json({
         ok: true,
-        usuarios
+        usuarios,
+
+        //estoy tomando esto de la req del body que lo agregue con el middleware
+        "uid del que hizo peticion": req.uid
     });
 } 
 

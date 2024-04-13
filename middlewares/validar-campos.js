@@ -13,6 +13,7 @@ const validarCampos = (req, resp = response, next) => {
         })
     }
 
+    //seguir con el middleware
     next()
 }
 
