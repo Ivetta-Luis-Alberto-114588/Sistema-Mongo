@@ -45,8 +45,9 @@ const addUsuario = async (req, resp = response)=> {
         console.log("usuario creado: " + usuario)
 
         //generar jwt
-        const token = await generarJwt(usuario.uid)
-        console.log(token)
+        const token = await generarJwt(usuario._id)
+        console.log("uid del usuario: " + usuario._id)
+        console.log("token: " + token)
 
         resp.status(200).json({
             ok: true,

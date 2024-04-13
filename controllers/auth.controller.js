@@ -30,7 +30,7 @@ const login = async (req, resp = response) =>{
         }
 
         //generar el token
-        const token = await generarJwt( usuarioDB.uid ) 
+        const token = await generarJwt( usuarioDB._id ) 
 
 
         resp.status(200).json({
