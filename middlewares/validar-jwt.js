@@ -19,10 +19,12 @@ const validarJwt = (req, resp = response, next) =>{
     try {
 
         //verifico que el token capturado sea igual al proceso de tokenizar con la semilla del jwt
+        // y lo extraigo para despues agregarlo a la request
+        //el uid es de la persona que se autentico. Esto es debido a que el token tiene en el payload el uid
         const { uid } = jwt.verify (token, process.env.JWT_SECRET )
         
 
-        //este middlewere va a agregar en el cuerpo de la response el token
+        //este middlewere va a agregar en el cuerpo de la response el uid
         req.uid = uid;
         
         //seguir con el middlewares

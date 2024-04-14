@@ -17,7 +17,14 @@ const router = Router();
 router.get( '/', getMedicos);
 router.post( 
     '/', 
-    [], 
+    [
+        validarJwt,
+        check('nombre', "el nombre es requerido").not().isEmpty(),
+
+        //aca es para validar que el uid sea del tipo mongo
+        check('hospital', "el uid del hospital debe ser valido").isMongoId(),
+        validarCampos
+    ], 
     addMedico
 );
 

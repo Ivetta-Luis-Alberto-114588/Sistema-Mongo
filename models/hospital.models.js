@@ -11,8 +11,11 @@ const HospitalSchema = Schema({
     },
     usuario:{
         type: Schema.Types.ObjectId,
-        ref: 'Usuario'
+        ref: 'Usuario',
+        required : true
     }
+    //esto hace que se cree la coleccion con el nombre de hospitales y no que le ponga una
+    // s al final de Hospital de manera automatica
 }, {collection: 'hospitales'}  );
 
 HospitalSchema.method('toJSON', function() {
