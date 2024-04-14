@@ -6,8 +6,20 @@ const { generarJwt } = require('../helpers/jwt.helpers')
 
 const getUsuarios = async (req, resp)=> {
     
+    //capturo el query que pasan en la request con en nombre desde
+    //si no viene nada en el query entonces va a poner un 0
+    const desde = Number( req.query.desde ) || 0
+      
+
     //observar que no se pone el uid para devolver, pero sin embargo el middleware lo agrega al header
-    const usuarios = await Usuario.find( {}, 'nombre email password role google ' )
+    const usuarios = await Usuario
+                            .find( {}, 'nombre email password role google ' )
+                            .skip( desde )  //esto va a hacer saltearse todo antes del skip
+                            .limit ( 5 ) //aca digo cuantos registros voy a mostrar
+
+    //cuento la cantidad total de registros en la bd
+    const total = await Usuario.countDocuments()
+    console.log (total)
     
     resp.status(200).json({
         ok: true,
