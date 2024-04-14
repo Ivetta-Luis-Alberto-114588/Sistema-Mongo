@@ -1,14 +1,22 @@
 const {response} = require('express')
 const Medico = require('../models/medico.models')
 
-const getMedicos = (req, resp = response) =>{
+const getMedicos = async (req, resp = response) =>{
+    
+    const medicos = await Medico.find()
+                            .populate('usuario', ['nombre', 'img'])
+                            .populate('hospital', ['nombre', 'img'])
+    
     resp.json({
         ok: true,
-        msg: 'getMedicos'
+        medicos
     })
 }
 
 const addMedico = async (req, resp = response) =>{
+
+
+    console.log (req)
 
     //uid del usuario que creo el medico, viene del middleware
     const uid = req.uid
