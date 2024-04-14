@@ -22,4 +22,4 @@ HospitalSchema.method('toJSON', function() {
 
 
 
-module.exports = {}
+module.exports = model ('Hospital', HospitalSchema)

@@ -9,6 +9,8 @@ const { check } = require('express-validator')
 const {validarCampos} = require( '../middlewares/validar-campos' )
 const { getMedicos, addMedico, updateMedico, deleteMedico} = require('../controllers/medico.controller')
 
+const {validarJwt} = require('../middlewares/validar-jwt')
+
 const router = Router();
 
 
