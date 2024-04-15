@@ -1,6 +1,6 @@
 const express = require('express');
 
-//variables de sistema
+//variables de sistema. Ejecuto una funcion llamada config() de nodemon. Esta funcion lee el archivo .evn
 require('dotenv').config()
 console.log('variables entorno andando')
 
@@ -15,7 +15,7 @@ const app = express();
 console.log('servidor express andando')
 
 
-//configurar cors
+//middleware de la dependencia de  cors
 app.use(cors())
 console.log('cors andando')
 
