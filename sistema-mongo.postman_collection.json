@@ -13,7 +13,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTMxMTM1NzQsImV4cCI6MTcxMzExNzE3NH0.xdt3nN9q8tSXxhcnMRCzkKIOGjK2qBDhsQrkWi7LqyM",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
 						"type": "text"
 					}
 				],
@@ -155,13 +155,13 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTMwOTI0NTgsImV4cCI6MTcxMzA5NjA1OH0.J0qFGIGTGBM0LVpJSXNgZ0jTtGOY2tZ1wKfP0g3Awyw",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n            \"nombre\": \"Hospital 5\"\r\n            \r\n}",
+					"raw": "{\r\n            \"nombre\": \"hospital de luis 5\"\r\n            \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -266,13 +266,13 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTMwOTY5MjcsImV4cCI6MTcxMzEwMDUyN30.jiZKaskzGCi7SQAOfb2IouJVJxKjzCCteIsRMLZaBTg",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n            \"nombre\": \"medico 4\",\r\n            \"hospital\": \"661bc0cd7f8ba710f53a7630\"\r\n}",
+					"raw": "{\r\n            \"nombre\": \"medico 4 luis\",\r\n            \"hospital\": \"661bc0cd7f8ba710f53a7630\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -389,7 +389,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTMxMjEyMjYsImV4cCI6MTcxMzEyNDgyNn0.LFTuXr3LbD4XLb23Ifcsq75n3NgWqdpDSXWxIBSOZf0",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
 						"type": "text"
 					}
 				],
@@ -414,7 +414,93 @@
 					"query": [
 						{
 							"key": "x-token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTMxMTcwNTIsImV4cCI6MTcxMzEyMDY1Mn0.WzKt0-fjTm3DSPz0-YiBbqOMw_XYSl37rrGPY2lBebY",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "busqueda por coleccion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/todo/coleccion/medicos/luis",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"todo",
+						"coleccion",
+						"medicos",
+						"luis"
+					],
+					"query": [
+						{
+							"key": "x-token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subir archivo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/upload/hospitales/1235",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"upload",
+						"hospitales",
+						"1235"
+					],
+					"query": [
+						{
+							"key": "x-token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NjE5ZWY0NTI4YWFlMDI0NzEyMDhiZDQiLCJpYXQiOjE3MTM0Nzc5ODgsImV4cCI6MTcxMzQ4MTU4OH0.THFv7e-FToDj3UucTEB-NJC6ES90PQSj9VI-89FJy_I",
 							"disabled": true
 						}
 					]

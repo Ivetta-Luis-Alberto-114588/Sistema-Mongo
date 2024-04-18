@@ -3,7 +3,7 @@
  */
 
 const { Router } = require('express')
-const { getTodo } = require('../controllers/busquedas.controller')
+const { getTodo, getDocumentoColeccion } = require('../controllers/busquedas.controller')
 const {validarJwt} = require('../middlewares/validar-jwt');
 
 
@@ -11,11 +11,7 @@ const {validarJwt} = require('../middlewares/validar-jwt');
 
 const router = Router();
 
-router.get(
-    '/:busqueda',
-    [
-        validarJwt
-    ],
-    getTodo)
+router.get('/:busqueda', [ validarJwt ], getTodo)
+router.get('/coleccion/:tabla/:busqueda', [ validarJwt ], getDocumentoColeccion)
 
 module.exports = router
