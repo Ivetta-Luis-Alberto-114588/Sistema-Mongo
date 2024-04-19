@@ -1,4 +1,5 @@
-const { response } = require("express");
+const { response } = require('express');
+const { v4: uuidv4 } = require('uuid');
 
 
 const fileUpload = (req, resp = response) => {
@@ -24,13 +25,51 @@ const fileUpload = (req, resp = response) => {
         });
       }
 
-      //validar imagen...
+      //procesar imagen...
+      //tengo acceso a los files por el middleware de la instalacion expressFileUpload() que esta en la ruta
+      const file = req.files.imagen
+     
+      //obtener la extension del archivo
+      const nombreCortado = file.name.split('.')  //esto me devuelve un arreglo donde cada miembre fue seaparado por el .
+      const extensionArchivo = nombreCortado[ nombreCortado.length -1] //obtengo el ultimo termino del array
+
+      //validar extension
+      const extensionesValidas = ['jpg', 'jpeg', 'png']
+      if( !extensionesValidas.includes(extensionArchivo)){
+        return resp.status(400).json({
+            ok: false,
+            msg:"extension del archivo no valida, solo jpg, jpeg y png"
+        })
+      }
+
+      //generar el nombre del archivo con uuid
+      const nombreArchivo =   `${ uuidv4() }.${extensionArchivo}`
 
 
-    resp.json({
-        ok: true,
-        msg: 'file uploaded' 
-    })
+      //crear el path para guardar el archivo
+      const path = `./uploads/${tipo}/${nombreArchivo}`
+
+       // mover la imagen
+        file.mv(path, (err) => {
+            if (err){
+                console.log(err)
+                return resp.status(500).json({
+                    ok: true,
+                    msg: "error al mover la imagen"
+                })
+
+            }
+
+            resp.json({
+                ok: true,
+                msg: "archivo subido" ,
+                nombreArchivo
+            })
+        });
+
+      //
+
+
 }
 
 module.exports = {
