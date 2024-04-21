@@ -12,14 +12,16 @@ const getUsuarios = async (req, resp)=> {
       
 
     //observar que no se pone el uid para devolver, pero sin embargo el middleware lo agrega al header
-    const usuarios = await Usuario
-                            .find( {}, 'nombre email password role google ' )
+    const [usuarios, total] = await  Promise.all([ Usuario
+                            .find( {}, 'nombre email password role google img ' ) //aca son las propiedades
+                            //     que quiero mostrar
                             .skip( desde )  //esto va a hacer saltearse todo antes del skip
-                            .limit ( 5 ) //aca digo cuantos registros voy a mostrar
+                            .limit ( 5 ), //aca digo cuantos registros voy a mostrar
 
     //cuento la cantidad total de registros en la bd
-    const total = await Usuario.countDocuments()
-    console.log (total)
+    Usuario.countDocuments()
+    
+    ])
     
     resp.status(200).json({
         ok: true,
