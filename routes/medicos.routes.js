@@ -29,13 +29,21 @@ router.post(
 );
 
 router.put(
-    '/:uid', 
-    [    ],
+    '/:id', 
+    [
+        validarJwt,
+        check('nombre', "el nombre es requerido").not().isEmpty(),
+
+        //aca es para validar que el uid sea del tipo mongo
+        check('hospital', "el uid del hospital debe ser valido").isMongoId(),
+        validarCampos
+    ],
     updateMedico
 );
 
 router.delete( 
-    '/:uid', 
+    '/:id', 
+    [validarJwt],
     deleteMedico
 );
 
