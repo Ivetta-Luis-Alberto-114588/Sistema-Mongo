@@ -103,11 +103,40 @@ const updateHospital = async (req, resp = response) =>{
 }
 
 
-const deleteHospital = (req, resp = response) =>{
-    resp.json({
-        ok: true,
-        msg: 'deleteHospital'
-    })
+const deleteHospital = async (req, resp = response) =>{
+    
+    const id = req.params.id
+
+    try {
+
+        const hospital = await Hospital.findById ( id )
+
+        if ( !hospital ) {
+            return resp.status(404).json({
+                ok: false,
+                msg: 'no se pudo eliminar el hospital porque no existe el uid'
+            })
+        }
+
+        await Hospital.findByIdAndDelete( id )        
+
+
+        resp.status(200).json({
+            ok: true,
+            msg: 'hospital borrado'
+        })
+        
+    } catch (error) {
+        console.log(error)
+        
+        resp.status(500).json({
+            ok: false,
+            msg: 'no se pudo eliminar el hospital'
+        })
+        
+    }
+
+
 }
 
 
