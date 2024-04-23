@@ -52,11 +52,54 @@ const addHospital = async (req, resp = response) =>{
 }
 
 
-const updateHospital = (req, resp = response) =>{
-    resp.json({
-        ok: true,
-        msg: 'updateHospital'
-    })
+const updateHospital = async (req, resp = response) =>{
+    
+    const id = req.params.id
+    const uid = req.uid
+
+
+
+    try {
+
+        const hospital = await Hospital.findById( id )
+
+        if ( !hospital){
+            return resp.status(404).json({
+                ok: false,
+                msg: 'no existe ese uid en los hospitales'
+            })
+        }
+
+        //actualizar tradicional
+        // hospital.nombre = req.body.nombre
+
+        const cambiosHospital = {
+            ...req.body,
+            usuario: uid
+        }
+
+        const hospitalActualizado = await Hospital.findByIdAndUpdate( id, cambiosHospital, {new: true}  )
+
+        hospital.save() 
+
+        resp.status(200).json({
+            ok: true,
+            msg: 'updateHospital',
+            hospital: hospitalActualizado
+        })
+        
+    } catch (error) {
+
+        console.log(error)
+
+        resp.status(500).json({
+            ok: false,
+            msg: 'error al actualizar hospital' + error
+        })
+    }
+
+    
+
 }
 
 
