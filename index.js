@@ -19,6 +19,9 @@ console.log('servidor express andando')
 app.use(cors())
 console.log('cors andando')
 
+//carpeta publica
+app.use ( express.static( 'public' ) )
+
 //lectura y parseo body
 app.use( express.json() )
 
@@ -43,6 +46,7 @@ app.use('/api/hospitales', require('./routes/hospitales.routes'))
 app.use('/api/medicos', require('./routes/medicos.routes'))
 app.use('/api/todo', require ('./routes/busquedas.routes'))
 app.use('/api/upload', require ('./routes/uploads.routes'))
+
 
 
 
