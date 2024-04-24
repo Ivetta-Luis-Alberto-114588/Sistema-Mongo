@@ -20,7 +20,16 @@ const MedicoSchema = Schema({
         required: true
     },
 
-}, {collection: 'medicos'}  );
+    },
+    { 
+        //le agrego el timestamp de creacion y modificacion en la bd
+        timestamps: true,
+
+        //esto hace que se cree la coleccion con el nombre de medicos y no que le ponga una
+        // s al final de Medicos de manera automatica
+        collection: 'medicos'
+    } 
+);
 
 MedicoSchema.method('toJSON', function() {
     const {__v, ...object} = this.toObject()
@@ -28,5 +37,5 @@ MedicoSchema.method('toJSON', function() {
 })
 
 
-
+//Medico es el nombre de la tabla de Mongo  que va a manejar el MedicoSchema
 module.exports = model ('Medico', MedicoSchema)

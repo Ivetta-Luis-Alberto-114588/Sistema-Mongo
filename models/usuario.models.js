@@ -9,6 +9,7 @@ const UsuarioSchema = Schema ({
     role: {type: String, required: true, default: 'USER_ROLE'},
     google: { type: Boolean, default: false}},
     {
+        //le agrego el timestamp de creacion y modificacion en la bd
         timestamps: true
     }
 
@@ -23,5 +24,5 @@ UsuarioSchema.method('toJSON', function() {
     return object
 })
 
-
+//Usuario es el nombre de la tabla de Mongo que va a manejar el UsuarioSchema
 module.exports = model ( 'Usuario', UsuarioSchema )
