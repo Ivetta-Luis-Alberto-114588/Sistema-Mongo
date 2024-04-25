@@ -17,8 +17,8 @@ const UsuarioSchema = Schema ({
 
 //esto es para cambiar la forma de ver el _id que muestra mongo y pasarlo a mostrar como uid
 UsuarioSchema.method('toJSON', function() {
-    const { __v, _id,  ...object} = this.toObject();
-    // const { __v, _id, password  ...object} = this.toObject();
+    // const { __v, _id,  ...object} = this.toObject();
+    const { __v, _id, password,  ...object} = this.toObject();
     
     object.uid = _id
     return object

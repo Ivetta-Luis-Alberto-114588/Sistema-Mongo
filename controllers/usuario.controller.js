@@ -35,7 +35,10 @@ const getUsuarios = async (req, resp)=> {
 //creacion de usuario
 const addUsuario = async (req, resp = response)=> {
 
-    const {password, email, nombre} = req.body        
+    //estoy exponiendo las propiedades del body que voy a 
+    // usar para hacer el usuario, si me olvido de alguna
+    // no se va  guardar en la bd
+    const {password, email, nombre, img} = req.body        
 
     try {
 
@@ -56,6 +59,9 @@ const addUsuario = async (req, resp = response)=> {
 
         //encripto el pass con la sal
         usuario.password = bcryptjs.hashSync(password, salt)
+
+        //asignar img
+        usuario.img = img
 
         //guardar usuario
         await usuario.save();
