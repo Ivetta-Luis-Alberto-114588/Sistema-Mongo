@@ -40,6 +40,7 @@ const login = async (req, resp = response) =>{
             msg: "login ok",
             usuario: usuarioDB.nombre,
             email: usuarioDB.email,
+            img: usuarioDB.img, 
             token: token,
             uid: usuarioDB._id
         })
