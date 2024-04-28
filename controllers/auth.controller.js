@@ -38,6 +38,8 @@ const login = async (req, resp = response) =>{
         resp.status(200).json({
             ok: true,
             msg: "login ok",
+            usuario: usuarioDB.nombre,
+            email: usuarioDB.email,
             token: token,
             uid: usuarioDB._id
         })
@@ -104,11 +106,14 @@ const renewToken = async (req, resp = response) => {
             
     const uid = req.uid
 
+    const usuarioDB = await Usuario.findOne( {_id: uid})
+
     //generar el token
     const token = await generarJwt( uid) 
 
     resp.json({
         ok: true,
+        usuario: usuarioDB,
         token
     })
 }
