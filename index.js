@@ -20,6 +20,7 @@ app.use(cors())
 console.log('cors andando')
 
 //carpeta publica
+//tengo que ejectuar en el navegador http://localhost:3000/ para ver lo que esta en la carpeta publica
 app.use ( express.static( 'public' ) )
 
 //lectura y parseo body

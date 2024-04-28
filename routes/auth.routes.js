@@ -22,6 +22,7 @@ router.post
 )
 
 
+//para ver este token entrar a http://localhost:3000/
 router.post
     (
         '/google',

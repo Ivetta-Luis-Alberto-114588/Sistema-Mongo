@@ -54,12 +54,19 @@ const login = async (req, resp = response) =>{
     }
 }
 
+
+//para ver el token entrar a http://localhost:3000/
 const googleSignIn = async (req, resp = response) => {
     
     try {
         // const googleUser = await googleVerify ( req.body.token )
         //desectructuro la info del usuario
         const {email, name, picture} = await googleVerify ( req.body.token )
+        console.log ("respuesta de google cuando se ejectua el metodo googleSignIn de authController:"
+                        , email
+                        , name
+                        , picture     
+        )
 
         //verifico si existe el usuario
         const usuarioDB = await Usuario.findOne( { email })
@@ -67,15 +74,19 @@ const googleSignIn = async (req, resp = response) => {
 
         if (!usuarioDB) {
             usuario = new Usuario({
-                nombre: name,
+                nombre: name, //asingo a la propiedad nombre el name de google
                 email,
-                password: '@@@',
-                img: picture,
+                password: '@@@', //pongo cualquier contraseña
+                img: picture, //asigno a img del usuario la picture de google
                 google: true
             })
         } else {
             usuario = usuarioDB;
+
+            //ahora pongo la imagen de google en la img de mi usuario
+            usuario.img = picture
             usuario.google = true;
+            console.log("como queda el usuario en el metodo googleSignIn del authController", usuario)
             //usuario.password = '@@'
         }
 
