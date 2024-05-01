@@ -1,8 +1,10 @@
+const path = require('path')
 const { response } = require('express')
 const Usuario = require('../models/usuario.models')
 const bcrypt = require('bcryptjs')
 const {generarJwt} = require('../helpers/jwt.helpers')
 const { googleVerify } = require('../helpers/google-verify.helpers')
+const { retornaImage } = require('./uploads.controller')
 
 const login = async (req, resp = response) =>{
     
@@ -163,9 +165,15 @@ const renewToken = async (req, resp = response) => {
     const uid = req.uid
 
     const usuarioDB = await Usuario.findOne( {_id: uid})
-
+   
     //generar el token
     const token = await generarJwt( uid) 
+
+
+    //si el usuario no tiene imagen le pongo la imange de NO DISPONIBLE
+    if( !usuarioDB.img){
+        usuarioDB.img = 'no_disponible.jpg'
+    }
 
     resp.json({
         ok: true,
