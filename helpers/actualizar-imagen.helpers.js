@@ -8,7 +8,7 @@ const fs = require ('fs')
 const borrarImagen = ( path ) => {
     //si existe el archivo viejo la borra
     if( fs.existsSync( path ) ){
-        fs.unlinkSync( pathViejo )
+        fs.unlinkSync( path )
     }
 }
 
