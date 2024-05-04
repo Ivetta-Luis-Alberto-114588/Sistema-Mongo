@@ -124,7 +124,16 @@ const updateUsuario = async (req, resp = response ) => {
             }
         }
 
-        campos.email = email
+        //en el caso que no sea un usuario de google entonces va a poder actualizar el email
+        //si es un usuario de google no debe poder actualizar el email
+        if( !usuarioDb.google ){
+            campos.email = email
+        } else if( usuarioDb !== email){
+            return resp.status(400).json({
+                ok: false,
+                msg: "los usuarios de google no pueden cambiar su email"
+            })
+        }
 
         // se le pone {new: true} para que me devuelva el usuario actualizado a la primera
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
