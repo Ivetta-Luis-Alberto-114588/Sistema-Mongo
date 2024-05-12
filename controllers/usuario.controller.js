@@ -18,14 +18,15 @@ const getUsuarios = async (req, resp)=> {
                             .skip( desde )  //esto va a hacer saltearse todo antes del skip
                             .limit ( 5 ), //aca digo cuantos registros voy a mostrar
 
-    //cuento la cantidad total de registros en la bd
-    Usuario.countDocuments()
+                            //cuento la cantidad total de registros en la bd
+                            Usuario.countDocuments()
     
     ])
     
     resp.status(200).json({
         ok: true,
         usuarios,
+        total,
 
         //estoy tomando esto de la req del body que lo agregue con el middleware
         "uid del que hizo peticion": req.uid
