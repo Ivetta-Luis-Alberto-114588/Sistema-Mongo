@@ -25,7 +25,7 @@ const getTodo = async (req, resp = response) =>{
         Medico.find( { nombre : busquedaRegExp } )
     ])
 
-
+  
     resp.status(200).json({
         ok: true,
         usuarios,
