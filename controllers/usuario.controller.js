@@ -89,19 +89,76 @@ const addUsuario = async (req, resp = response)=> {
 } 
 
 //actualizacion de usuario
-const updateUsuario = async (req, resp = response ) => {
+// const updateUsuario = async (req, resp = response ) => {
 
-    //obtengo el uid enviado (que es el usuario que se quiere modificar)
+//     //obtengo el uid enviado (que es el usuario que se quiere modificar)
+//     const uid = req.params.uid
+
+//     try {
+//         //TODO: validar token y verificar usuario
+
+//         //encuentro el usuario con ese uid
+//         const usuarioDb = await Usuario.findById(uid)
+//         console.log("usuario encontrado: " + usuarioDb)
+        
+//         //si el usuario no existe devuelvo un error
+//         if(!usuarioDb){
+//             return resp.status(404).json({
+//                 ok: false,
+//                 msg: "no existe un usuario con el id: "  + uid
+//             })
+//         }
+
+//         //actualizacion
+
+//         //creo una variable que va a tener todos los campos del body de es uid
+//         const {password, google, email, ...campos} = req.body
+
+//         if(usuarioDb.email !== email){
+            
+//             const existeEmail = await Usuario.findOne( { email })
+//             if ( existeEmail ) {
+//                 return resp.status(400).json({
+//                     ok: false,
+//                     msg: "ya existe un usuario con ese email"
+//                 })
+//             }
+//         }
+
+//         //en el caso que no sea un usuario de google entonces va a poder actualizar el email
+//         //si es un usuario de google no debe poder actualizar el email
+//         if( !usuarioDb.google ){
+//             campos.email = email
+//         } else if( usuarioDb !== email){
+//             return resp.status(400).json({
+//                 ok: false,
+//                 msg: "los usuarios de google no pueden cambiar su email"
+//             })
+//         }
+
+//         // se le pone {new: true} para que me devuelva el usuario actualizado a la primera
+//         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
+
+//         resp.json({
+//             ok: true,
+//             usuario: usuarioActualizado
+//         })
+        
+//     } catch (error) {
+//         console.log(error)
+//         resp.status(500).json({
+//             ok: false,
+//             msg : "error al actualizar"
+//         })
+//     }
+// }
+
+const updateUsuario = async (req, resp = response ) => {
     const uid = req.params.uid
 
     try {
-        //TODO: validar token y verificar usuario
-
-        //encuentro el usuario con ese uid
         const usuarioDb = await Usuario.findById(uid)
-        console.log("usuario encontrado: " + usuarioDb)
         
-        //si el usuario no existe devuelvo un error
         if(!usuarioDb){
             return resp.status(404).json({
                 ok: false,
@@ -109,13 +166,9 @@ const updateUsuario = async (req, resp = response ) => {
             })
         }
 
-        //actualizacion
-
-        //creo una variable que va a tener todos los campos del body de es uid
         const {password, google, email, ...campos} = req.body
 
         if(usuarioDb.email !== email){
-            
             const existeEmail = await Usuario.findOne( { email })
             if ( existeEmail ) {
                 return resp.status(400).json({
@@ -125,18 +178,12 @@ const updateUsuario = async (req, resp = response ) => {
             }
         }
 
-        //en el caso que no sea un usuario de google entonces va a poder actualizar el email
-        //si es un usuario de google no debe poder actualizar el email
-        if( !usuarioDb.google ){
+        if( usuarioDb.google ){
+            delete campos.email;
+        } else if(usuarioDb.email !== email){
             campos.email = email
-        } else if( usuarioDb !== email){
-            return resp.status(400).json({
-                ok: false,
-                msg: "los usuarios de google no pueden cambiar su email"
-            })
         }
 
-        // se le pone {new: true} para que me devuelva el usuario actualizado a la primera
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true})
 
         resp.json({
