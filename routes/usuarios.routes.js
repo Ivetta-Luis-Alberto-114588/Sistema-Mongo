@@ -8,6 +8,8 @@ const { getUsuarios, addUsuario, updateUsuario, deleteUsuario} = require('../con
 
 const {validarJwt} = require('../middlewares/validar-jwt')
 const {validarCampos} = require( '../middlewares/validar-campos' )
+const {validarAdmin_Role} = require("../middlewares/validarAdminRole")
+const {validarMismo_Usuario} = require("../middlewares/validarMismoUsuario")
 
 const router = Router();
 
@@ -33,6 +35,7 @@ router.put(
     '/:uid', 
     [
         validarJwt,
+        validarMismo_Usuario,
         check('nombre', "el nombre es obligatorio").not().isEmpty(),
         check('email', "el email es obligatorio").isEmail(),
         // check('role', "el rol es obligatorio").not().isEmpty(),
@@ -40,7 +43,7 @@ router.put(
     ],
     updateUsuario);
 
-router.delete( '/:uid', validarJwt, deleteUsuario );
+router.delete( '/:uid', [validarJwt, validarAdmin_Role], deleteUsuario );
 
 
 
