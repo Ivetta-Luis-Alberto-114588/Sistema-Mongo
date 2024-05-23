@@ -41,6 +41,7 @@ const login = async (req, resp = response) =>{
         resp.status(200).json({
             ok: true,
             msg: "login ok",
+            role: usuarioDB.role,
             usuario: usuarioDB.nombre,
             email: usuarioDB.email,
             img: usuarioDB.img, 
