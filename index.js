@@ -30,6 +30,10 @@ app.use( express.json() )
 dbConnection();
 console.log('db on line')
 
+app.get('/', (req, resp) => {
+    resp.send("hola mundo")
+})
+
 //alta sevidor
 //npm run start:dev
 
