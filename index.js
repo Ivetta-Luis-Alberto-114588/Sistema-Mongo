@@ -58,3 +58,5 @@ app.listen ( process.env.PORT, () => {
     console.log ('servidor corriendo puerto ' + process.env.PORT )
 } )
 
+console.log("para probar el server: https://sistema-mongo.onrender.com/api/ping")
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-in</title>
+</head>
+<body>
+    <h2>Google Sign in</h2>
+    <div id="buttonDiv"></div>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <script>
+
+      // https://developers.google.com/identity/gsi/web/reference/js-reference?hl=es-419
+
+      //funcion originl del google
+      // function handleCredentialResponse(response) {
+        //   console.log("Encoded JWT ID token: " + response.credential);
+        // }
+
+
+        //modificaciones a lo original de google
+        var url = "http://localhost:3000/api/login/google"
+
+        /*
+        cuando se cargue la pagina, se va a ejecutar esta funcion:
+          1) crea una isntancia de google con google.accounts.id.initialize()
+          2) client_id: es el ID de cliente de tu aplicación
+          3) callback: La función de JavaScript que controla los tokens de ID. Google One Tap y el modo de UX del 
+              botón de Acceder con Google popup usan este atributo
+        */
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+          });
+
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "filled_blue", size: "large" }  // customization attributes
+          );
+
+          //muestra el el mensaje emergente al apretar el boton
+          google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+
+        /*
+          esta funcion devuelve el token JWT de GOOGLE
+          hace un POST a un ENDPOINT mio
+          el response es la respuesta de GOOGLE
+        */
+        function handleCredentialResponse(response) {
+
+          /*
+          esta es la response de GOOGLE
+          clientId: el id de google
+          client_id: el id de google
+          credential : es el token de google
+          select_by: es si fue por boton, o por otro metod
+          */
+
+          console.log("Encoded JWT ID token: " + response.credential);
+          /*
+            ahora a mi ENDPOINT le voy a pasar el token que esta en la respuesta de google response.credential
+            este token en el payload tiene los siguientes datos
+            {
+              "iss": "https://accounts.google.com",
+              "azp": "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
+              "aud": "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
+              "sub": "105254061348633157156",
+              "email": "laivetta@gmail.com",
+              "email_verified": true,
+              "nbf": 1714398196,
+              "name": "luis alberto ivetta",
+              "picture": "https://lh3.googleusercontent.com/a/ACg8ocLh8tj7cn1h36F3LsaEeFpj88Amo2sonObMv7A82PxWm4uKBrb6vA=s96-c",
+              "given_name": "luis alberto",
+              "family_name": "ivetta",
+              "iat": 1714398496,
+              "exp": 1714402096,
+              "jti": "4eab596a66effd4f22243739d0c4f7ad52bbe59d"
+            }
+          */  
+          
+          fetch( url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                //en el body le paso el token de GOOGLE y despues este ENDPOINT extrae el mail y busco el usuario por mail
+                body: JSON.stringify ( { token: response.credential } )
+            })
+            .then ( resp => resp.json() )
+            .then ( data => {
+                  console.log ( 'Respuesta de nuestro server', data ),
+                  console.log ('response de  google: ' , response)
+                  console.log ('token de google: ' , response.credential)})
+            .catch ( console.log )
+
+        }
+
+
+      </script>
+    
+</body>
+</html>
