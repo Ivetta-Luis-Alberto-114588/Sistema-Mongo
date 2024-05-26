@@ -1,105 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-critters-container>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sign-in</title>
-</head>
-<body>
-    <h2>Google Sign in</h2>
-    <div id="buttonDiv"></div>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-
-    <script>
-
-      // https://developers.google.com/identity/gsi/web/reference/js-reference?hl=es-419
-
-      //funcion originl del google
-      // function handleCredentialResponse(response) {
-        //   console.log("Encoded JWT ID token: " + response.credential);
-        // }
+  <meta charset="utf-8">
+  <title>Administracion</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!--   Autenticacion para google -->
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
 
-        //modificaciones a lo original de google
-        var url = "http://localhost:3000/api/login/google"
+    <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
 
-        /*
-        cuando se cargue la pagina, se va a ejecutar esta funcion:
-          1) crea una isntancia de google con google.accounts.id.initialize()
-          2) client_id: es el ID de cliente de tu aplicación
-          3) callback: La función de JavaScript que controla los tokens de ID. Google One Tap y el modo de UX del 
-              botón de Acceder con Google popup usan este atributo
-        */
-        window.onload = function () {
-          google.accounts.id.initialize({
-            client_id: "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
-            callback: handleCredentialResponse
-          });
+    <!-- Bootstrap Core CSS -->
+    <style>@media print{*,::after,::before{text-shadow:none!important;box-shadow:none!important}p{orphans:3;widows:3}}html{box-sizing:border-box;font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:transparent}*,::after,::before{box-sizing:inherit}@-ms-viewport{width:device-width}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff}p{margin-top:0;margin-bottom:1rem}@-webkit-keyframes progress-bar-stripes{from{background-position:1rem 0}to{background-position:0 0}}</style><link href="./assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/plugins/bootstrap/css/bootstrap.min.css"></noscript>
+    <!-- Custom CSS -->
+    <style>@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700");@import url(../scss/icons/font-awesome/css/font-awesome.min.css);@import url(../scss/icons/simple-line-icons/css/simple-line-icons.css);@import url(../scss/icons/weather-icons/css/weather-icons.min.css);@import url(../scss/icons/linea-icons/linea.css);@import url(../scss/icons/themify-icons/themify-icons.css);@import url(../scss/icons/flag-icon-css/flag-icon.min.css);@import url(../scss/icons/material-design-iconic-font/css/materialdesignicons.min.css);@import url(../css/spinners.css);@import url(../css/animate.css);*{outline:none}body{background:#fff;font-family:"Montserrat", sans-serif;margin:0;overflow-x:hidden;color:#67757c;font-weight:300}html{position:relative;min-height:100%;background:#ffffff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@-webkit-keyframes heartbit{0%{-webkit-transform:scale(0);opacity:0.0}25%{-webkit-transform:scale(0.1);opacity:0.1}50%{-webkit-transform:scale(0.5);opacity:0.3}75%{-webkit-transform:scale(0.8);opacity:0.5}100%{-webkit-transform:scale(1);opacity:0.0}}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}@-webkit-keyframes ripple{0%{-webkit-box-shadow:0px 0px 0px 1px transparent;box-shadow:0px 0px 0px 1px transparent}50%{-webkit-box-shadow:0px 0px 0px 15px rgba(0, 0, 0, 0.1);box-shadow:0px 0px 0px 15px rgba(0, 0, 0, 0.1)}100%{-webkit-box-shadow:0px 0px 0px 15px transparent;box-shadow:0px 0px 0px 15px transparent}}@media (min-width: 768px){}@media (max-width: 767px){}</style><link href="./assets/css/style.css" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/style.css"></noscript>
+    <!-- You can change the theme colors from here -->
+    <link href="./assets/css/colors/default-dark.css" id="theme" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="./assets/css/colors/default-dark.css"></noscript>
 
-          google.accounts.id.renderButton(
-            document.getElementById("buttonDiv"),
-            { theme: "filled_blue", size: "large" }  // customization attributes
-          );
+<link rel="stylesheet" href="styles.81001aebd2f4f843.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.81001aebd2f4f843.css"></noscript></head>
+<body class="fix-header card-no-border fix-sidebar">
+  
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+  <div class="loader">
+    <div class="loader__figure"></div>
+    <p class="loader__label">Admin Pro</p>
+  </div>
+</div>
 
-          //muestra el el mensaje emergente al apretar el boton
-          google.accounts.id.prompt(); // also display the One Tap dialog
-        }
-
-
-        /*
-          esta funcion devuelve el token JWT de GOOGLE
-          hace un POST a un ENDPOINT mio
-          el response es la respuesta de GOOGLE
-        */
-        function handleCredentialResponse(response) {
-
-          /*
-          esta es la response de GOOGLE
-          clientId: el id de google
-          client_id: el id de google
-          credential : es el token de google
-          select_by: es si fue por boton, o por otro metod
-          */
-
-          console.log("Encoded JWT ID token: " + response.credential);
-          /*
-            ahora a mi ENDPOINT le voy a pasar el token que esta en la respuesta de google response.credential
-            este token en el payload tiene los siguientes datos
-            {
-              "iss": "https://accounts.google.com",
-              "azp": "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
-              "aud": "1098957435153-cjhs40btr7pg9iutn6d24f45kg8448d9.apps.googleusercontent.com",
-              "sub": "105254061348633157156",
-              "email": "laivetta@gmail.com",
-              "email_verified": true,
-              "nbf": 1714398196,
-              "name": "luis alberto ivetta",
-              "picture": "https://lh3.googleusercontent.com/a/ACg8ocLh8tj7cn1h36F3LsaEeFpj88Amo2sonObMv7A82PxWm4uKBrb6vA=s96-c",
-              "given_name": "luis alberto",
-              "family_name": "ivetta",
-              "iat": 1714398496,
-              "exp": 1714402096,
-              "jti": "4eab596a66effd4f22243739d0c4f7ad52bbe59d"
-            }
-          */  
-          
-          fetch( url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                //en el body le paso el token de GOOGLE y despues este ENDPOINT extrae el mail y busco el usuario por mail
-                body: JSON.stringify ( { token: response.credential } )
-            })
-            .then ( resp => resp.json() )
-            .then ( data => {
-                  console.log ( 'Respuesta de nuestro server', data ),
-                  console.log ('response de  google: ' , response)
-                  console.log ('token de google: ' , response.credential)})
-            .catch ( console.log )
-
-        }
-
-
-      </script>
     
-</body>
+    <app-root></app-root>
+
+
+  
+
+
+<!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="./assets/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="./assets/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="./assets/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="./assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="./assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./assets/js/custom.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="./assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="runtime.5d9bac6401defd1d.js" type="module"></script><script src="polyfills.9ad49464826dd6ce.js" type="module"></script><script src="main.7ed99b535bb2aa9f.js" type="module"></script></body>
 </html>
