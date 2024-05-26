@@ -107,11 +107,11 @@ const googleSignIn = async (req, resp = response) => {
         //desectructuro la info del usuario, lo que voy a usar es el 
         // mail para buscar los datos en mi BD y cuando ese dato coincide devuelvo un objeto
         const {email, name, picture} = await googleVerify ( req.body.token )
-        console.log ("respuesta de google cuando se ejectua el metodo googleSignIn de authController:"
-                        , email
-                        , name
-                        , picture     
-        )
+        // console.log ("respuesta de google cuando se ejectua el metodo googleSignIn de authController:"
+        //                 , email
+        //                 , name
+        //                 , picture     
+        // )
 
         //verifico si existe el usuario
         const usuarioDB = await Usuario.findOne( { email })
@@ -134,7 +134,7 @@ const googleSignIn = async (req, resp = response) => {
             //ahora pongo la imagen de google en la img de mi usuario
             usuario.img = picture
             usuario.google = true;
-            console.log("como queda el usuario en el metodo googleSignIn del authController", usuario)
+            // console.log("como queda el usuario en el metodo googleSignIn del authController", usuario)
             //usuario.password = '@@'
         }
 
