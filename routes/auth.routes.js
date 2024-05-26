@@ -43,7 +43,7 @@ router.get
         renewToken
 )
 
-router.get('/', (req, resp) => resp.send("hola mundo"))
+
 
 
 

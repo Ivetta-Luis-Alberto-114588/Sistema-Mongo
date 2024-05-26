@@ -49,7 +49,7 @@ app.use('/api/medicos', require('./routes/medicos.routes'))
 app.use('/api/todo', require ('./routes/busquedas.routes'))
 app.use('/api/upload', require ('./routes/uploads.routes'))
 
-
+router.get('/ping', (req, resp) => resp.send("pong"))
 
 
 app.listen ( process.env.PORT, () => {
